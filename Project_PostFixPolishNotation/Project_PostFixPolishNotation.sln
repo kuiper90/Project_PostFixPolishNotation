@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_PostFixPolishNotation", "Project_PostFixPolishNotation\Project_PostFixPolishNotation.csproj", "{D62D3334-F06C-4399-9B67-2749EEAB9960}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest_PostFixPolishNotation", "..\UnitTest_PostFixPolishNotation\UnitTest_PostFixPolishNotation.csproj", "{807A60A6-5E1D-435F-8291-C35308A3A545}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D62D3334-F06C-4399-9B67-2749EEAB9960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62D3334-F06C-4399-9B67-2749EEAB9960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62D3334-F06C-4399-9B67-2749EEAB9960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62D3334-F06C-4399-9B67-2749EEAB9960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{807A60A6-5E1D-435F-8291-C35308A3A545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{807A60A6-5E1D-435F-8291-C35308A3A545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{807A60A6-5E1D-435F-8291-C35308A3A545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{807A60A6-5E1D-435F-8291-C35308A3A545}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4749249A-7193-47E9-9BBC-B5B012E161A9}
+	EndGlobalSection
+EndGlobal
