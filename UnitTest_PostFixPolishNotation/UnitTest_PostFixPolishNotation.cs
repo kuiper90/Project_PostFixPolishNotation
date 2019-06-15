@@ -40,7 +40,7 @@ namespace UnitTest_PostFixPolishNotation
             string expression = "9 +";
             var exception = Record.Exception(() => EvaluateExpression(expression));
             Assert.IsType(typeof(Exception), exception);
-            Assert.True(exception.Message == "Expression doesn't contain enough elments.");
+            Assert.True(exception.Message == "Expression doesn't contain enough elements.");
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace UnitTest_PostFixPolishNotation
             string expression = "9 7";
             var exception = Record.Exception(() => EvaluateExpression(expression));
             Assert.IsType(typeof(Exception), exception);
-            Assert.True(exception.Message == "Expression doesn't contain enough elments.");
+            Assert.True(exception.Message == "Expression doesn't contain enough elements.");
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace UnitTest_PostFixPolishNotation
             string expression = "9";
             var exception = Record.Exception(() => EvaluateExpression(expression));
             Assert.IsType(typeof(Exception), exception);
-            Assert.True(exception.Message == "Expression doesn't contain enough elments.");
+            Assert.True(exception.Message == "Expression doesn't contain enough elements.");
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace UnitTest_PostFixPolishNotation
             string expression = "+";
             var exception = Record.Exception(() => EvaluateExpression(expression));
             Assert.IsType(typeof(Exception), exception);
-            Assert.True(exception.Message == "Expression doesn't contain enough elments.");
+            Assert.True(exception.Message == "Expression doesn't contain enough elements.");
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace UnitTest_PostFixPolishNotation
             string expression = "";
             var exception = Record.Exception(() => EvaluateExpression(expression));
             Assert.IsType(typeof(Exception), exception);
-            Assert.True(exception.Message == "Expression doesn't contain enough elments.");
+            Assert.True(exception.Message == "Expression doesn't contain enough elements.");
         }
 
         [Fact]

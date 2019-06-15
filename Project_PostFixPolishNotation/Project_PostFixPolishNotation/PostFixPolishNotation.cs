@@ -6,60 +6,51 @@ namespace Project_PostFixPolishNotation
 {
     public static class PostFixPolishNotation
     {
+        static readonly string[] ops = { "+", "-", "*", "/" };
+
         public static decimal EvaluateExpression(string expression)
         {
             string[] expr = expression.Split(' ');
-            int exprLen = expr.Count();
-
-            if (exprLen > 2)
-                return EvaluateExpr(expr);
-            throw new Exception("Expression doesn't contain enough elments.");
+            
+            if (expr.Count() > 2)
+                return EvalExpr(expr);
+            throw new Exception("Expression doesn't contain enough elements.");
         }
 
-        private static decimal EvaluateExpr(string[] expression)
+        static decimal EvalExpr(string[] expression)
         {
-            decimal number;
-            Stack<decimal> rez = expression
-            .Aggregate(new Stack<decimal>(), (acc, elem) =>
-            {
-
-                if (decimal.TryParse(elem, out number))
-                {
-                    acc.Push(number);
-                }
-                else
-                {
-                    switch (elem)
+            List<decimal> result = expression
+                .Aggregate(new List<decimal>(), (coll, item) => {
+                    if (Array.IndexOf(ops, item) == -1)
                     {
-                        case "*":
-                            {
-                                acc.Push(acc.Pop() * acc.Pop());
-                                break;
-                            }
-                        case "/":
-                            {
-                                number = acc.Pop();
-                                acc.Push(acc.Pop() / number);
-                                break;
-                            }
-                        case "+":
-                            {
-                                acc.Push(acc.Pop() + acc.Pop());
-                                break;
-                            }
-                        case "-":
-                            {
-                                number = acc.Pop();
-                                acc.Push(acc.Pop() - number);
-                                break;
-                            }
-                        default:
+                        if (decimal.TryParse(item, out decimal number) == false)
                             throw new Exception("Invalid expression.");
+                        coll.Add(number);
                     }
-                }
-                return acc;
-            });
-            return rez.Pop();
+                    else
+                    {
+                        if (coll.Count() < 2)
+                            throw new Exception("Invalid expression.");
+                        decimal nrOne = coll[coll.Count - 2];
+                        decimal nrTwo = coll[coll.Count - 1];                        
+                        coll = coll
+                            .Take(coll.Count - 2).ToList();
+                        coll.Add(ApplyOperator(item, nrOne, nrTwo));
+                    }
+                    return coll;
+                });
+            return result[0];
+        }
+
+        private static decimal ApplyOperator(string op, decimal nrOne, decimal nrTwo)
+        {
+            Func<decimal, decimal, decimal>[] opList = new Func<decimal, decimal, decimal>[] { (a, b) => a + b,
+                                                                                               (a, b) => a - b,
+                                                                                               (a, b) => a * b,
+                                                                                               (a, b) => a / b  };
+            int opIndex = Array.IndexOf(ops, op);
+
+            return opList[opIndex](nrOne, nrTwo);
         }
     }
 }
