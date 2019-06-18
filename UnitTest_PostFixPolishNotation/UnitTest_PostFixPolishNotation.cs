@@ -16,19 +16,33 @@ namespace UnitTest_PostFixPolishNotation
         [Fact]
         public void ValidPostFixExpr2_ShouldReturn_Value()
         {
+            string expression = "7 8 + 3 2 + /";
+        Assert.True(EvaluateExpression(expression) == 3);
+        }
+
+        [Fact]
+        public void ValidPostFixExpr3_ShouldReturn_Value()
+        {
+            string expression = "7 8 + 2 2 + /";
+            Assert.True(EvaluateExpression(expression) == 3.75);
+        }
+
+        [Fact]
+        public void ValidPostFixExpr4_ShouldReturn_Value()
+        {
             string expression = "9 5 - 2 7 + *";
             Assert.True(EvaluateExpression(expression) == 36);
         }
 
         [Fact]
-        public void ValidPostFixExpr3_ShouldReturn_Value()
+        public void ValidPostFixExpr5_ShouldReturn_Value()
         {
             string expression = "9 5 * 2 7 * +";
             Assert.True(EvaluateExpression(expression) == 59);
         }
 
         [Fact]
-        public void ValidPostFixExpr4_ShouldReturn_Value()
+        public void ValidPostFixExpr6_ShouldReturn_Value()
         {
             string expression = "9 5 + 2 + 7 +";
             Assert.True(EvaluateExpression(expression) == 23);
@@ -86,6 +100,15 @@ namespace UnitTest_PostFixPolishNotation
             var exception = Record.Exception(() => EvaluateExpression(expression));
             Assert.IsType(typeof(Exception), exception);
             Assert.True(exception.Message == "Invalid expression.");
+        }
+
+        [Fact]
+        public void InvalidPostFixExpr7_ShouldReturn_Value()
+        {
+            string expression = "7 8 + 2 2 - /";
+            var exception = Record.Exception(() => EvaluateExpression(expression));
+            Assert.IsType(typeof(Exception), exception);
+            Assert.True(exception.Message == "Division by zero.");
         }
     }
 }
