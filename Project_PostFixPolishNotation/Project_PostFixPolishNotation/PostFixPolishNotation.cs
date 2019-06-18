@@ -30,25 +30,28 @@ namespace Project_PostFixPolishNotation
 
         private static double ApplyOperator(string op, IEnumerable<double> items)
         {
-            string[] ops = { "+", "-", "*", "/" };
-
-            var opList = new Func<double, double, double>[]
+            var opList = new Dictionary<string, Func<double, double, double>>()
             {
-                (a, b) => a + b,
-                (a, b) => a - b,
-                (a, b) => a * b,
-                (a, b) => a / b
+                { "+", (a, b) => a + b },
+                { "-", (a, b) => a - b },
+                { "*", (a, b) => a * b },
+                { "/", (a, b) => a / b }
             };
-            int opIndex = Array.IndexOf(ops, op);
-            ValidateItemsAndOperator(items, opIndex);
-            return opList[opIndex](items.Skip(1).First(), items.First());
+            bool flag = opList.TryGetValue(op, out Func<double, double, double> valueFunc);
+            ValidateItemsAndOperator(items, flag);
+            ValidateOperation(items, op);
+            return valueFunc(items.Skip(1).First(), items.First());
         }
 
-        private static void ValidateItemsAndOperator(IEnumerable<double> items, int opIndex)
+        private static void ValidateItemsAndOperator(IEnumerable<double> items, bool flag)
         {
-            if (opIndex == -1 || items.Count() != 2)
+            if (!flag || items.Count() != 2)
                 throw new Exception("Invalid expression.");
-            if (opIndex == 3 && items.First() == 0)
+        }
+
+        private static void ValidateOperation(IEnumerable<double> items, string op)
+        {
+            if (op == "/" && items.First() == 0)
                 throw new Exception("Division by zero.");
         }
     }
