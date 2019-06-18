@@ -32,27 +32,24 @@ namespace Project_PostFixPolishNotation
         {
             string[] ops = { "+", "-", "*", "/" };
 
-            Func<double, double, double>[] opList = new Func<double, double, double>[] { (a, b) => a + b,
-                                                                                         (a, b) => a - b,
-                                                                                         (a, b) => a * b,
-                                                                                         (a, b) => a / b  };
+            var opList = new Func<double, double, double>[]
+            {
+                (a, b) => a + b,
+                (a, b) => a - b,
+                (a, b) => a * b,
+                (a, b) => a / b
+            };
             int opIndex = Array.IndexOf(ops, op);
-
-            if (opIndex == -1 || items.Count() != 2)
-                InvalidExpressionException();
-            if (opIndex == 3 && items.First() == 0)
-                InvalidOperationException();
+            ValidateItemsAndOperator(items, opIndex);
             return opList[opIndex](items.Skip(1).First(), items.First());
         }
 
-        private static void InvalidExpressionException()
+        private static void ValidateItemsAndOperator(IEnumerable<double> items, int opIndex)
         {
-            throw new Exception("Invalid expression.");
-        }
-
-        private static void InvalidOperationException()
-        {
-            throw new Exception("Division by zero.");
+            if (opIndex == -1 || items.Count() != 2)
+                throw new Exception("Invalid expression.");
+            if (opIndex == 3 && items.First() == 0)
+                throw new Exception("Division by zero.");
         }
     }
 }
