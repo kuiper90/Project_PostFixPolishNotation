@@ -39,16 +39,19 @@ namespace Project_PostFixPolishNotation
             int opIndex = Array.IndexOf(ops, op);
 
             if (opIndex == -1 || items.Count() != 2)
-                InvalidExpressionOrOperationException(true);
-            else if (opIndex == 3 && items.First() == 0)
-                InvalidExpressionOrOperationException(false);
+                InvalidExpressionException();
+            if (opIndex == 3 && items.First() == 0)
+                InvalidOperationException();
             return opList[opIndex](items.Skip(1).First(), items.First());
         }
 
-        private static void InvalidExpressionOrOperationException(bool exception)
+        private static void InvalidExpressionException()
         {
-            if (exception)
-                throw new Exception("Invalid expression.");
+            throw new Exception("Invalid expression.");
+        }
+
+        private static void InvalidOperationException()
+        {
             throw new Exception("Division by zero.");
         }
     }
